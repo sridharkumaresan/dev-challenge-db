@@ -1,0 +1,178 @@
+<html>
+<head>
+    <!--
+    This is the library that provides websocket streaming pub/sub
+    The dev serverver is serving the html and javascript, but it also provides updating fx data on /fx/prices.
+     -->
+    <script src="stomp.js"></script>
+</head>
+<body>
+<section class="fx-data">
+    <div class="information-panel">
+        <span id="infoLink">Information</span>
+    </div>
+    <table id="data-table">
+        <thead class="table-head">
+            <tr>
+                <th>Currency</th>
+                <th>bestBid</th>
+                <th>bestAsk</th>
+                <th>openBid</th>
+                <th>openAsk</th>
+                <th>lastChangeAsk</th>
+                <th>lastChangeBid</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- <tr>
+                <td>gbpusd</td>
+                <td>1.4191501846927284</td>
+                <td>1.4731472660923037</td>
+                <td>1.4015252135043959</td>
+                <td>1.4236747864956043</td>
+                <td>0.06409572095541138</td>
+                <td>0.045111164251133484</td>
+            </tr> -->
+        </tbody>
+    </table>
+
+</section>
+
+<!-- This is a description of what you should do for this task.  You can remove it for your answer -->
+<!-- <section class="content">
+    <h1>Updating Table</h1>
+
+    <p>
+        This page is served from <code>dev-challenge/site/index.html</code>.  To get set up, go into the
+        dev-challenge directory and run <code>npm install</code>.  To start the server, run
+        <code>npm start</code>
+    </p>
+
+    <p>
+        It includes javascript code bundled starting at <code>challenge/index.js</code> and
+        also a javascript library called <a href="http://jmesnil.net/stomp-websocket/doc/">stomp.js</a>
+        for connecting to a streaming pub/sub system over websockets.  Within a short time from loading
+        the page, it will connect over websockets to a stomp server that also runs when you run the
+        development server.
+    </p>
+
+    <section id="stomp-status">
+        It hasn't yet connected to the stomp server.  If this state persists for a significant length of time, check
+        <ul>
+            <li>that you are running a browser that supports javascript and WebSockets</li>
+            <li>that you have run the development server by going into the db-updating-table directory and
+                run it by running <code>npm start</code></li>
+            <li>that there were no errors during the development server starting (e.g. perhaps port
+                8011 was taken)</li>
+            <li>that you are accessing it through that dev server, at <a href="http://localhost:8011">http://localhost:8011</a>
+                and that no errors are appearing in your browsers console.</li>
+        </ul>
+        If none of that works, then ask for help by emailing <a href="mailto:adam.iley@db.com">adam.iley@db.com</a>.
+    </section>
+
+    <h2>Your Task</h2>
+
+    <p>
+        Your task is to show those currency pairs in a table with rows for each currency pair, which
+        includes columns for at least the name, the current best bid price, current best ask price,
+        the amount that the best bid last changed, and the amount the best ask price last changed.
+        This data can be read out of the price updates that are sent via stomp.  You should request the topic
+        <code>/fx/prices</code>, to receive update messages with a body that looks like this:
+    </p>
+
+<pre>{
+  "name": "usdjpy",
+  "bestBid": 106.7297012204255,
+  "bestAsk": 107.25199883791178,
+  "openBid": 107.22827132623534,
+  "openAsk": 109.78172867376465,
+  "lastChangeAsk": -4.862314256927661,
+  "lastChangeBid": -2.8769211401569663
+}</pre>
+
+    <p>
+        To make the task more interesting, the table should be sorted (and remain sorted) by the column
+        that indicates how much the best bid price last changed (lastChangeBid in the response data).
+    </p>
+
+    <h2>Restrictions</h2>
+
+    <p>
+        Because we want to assess your javascript programming ability, there is a requirement that you do
+        not use libraries or frameworks that you haven't written yourself for the updating table.
+        We mean this seriously.  Do not include any script tags beyond ones that reference the bundled
+        javascript or the stomp library.  Do not npm install any new dependencies.
+    </p>
+
+    <p>
+        Although adding dependencies you haven't written yourself to the page that features the updating table
+        is not allowed, dependencies that you only use during build or development e.g. for testing, etc are
+        allowed.
+    </p>
+
+    <h2>Notes</h2>
+
+    <p>
+        We want you to submit a modification of this project where this index.html page has been replaced
+        with a page showing the live updating table of sorted data.  This page should also mention or link to
+        anything else you want us to consider.  For example:
+    </p>
+
+    <ul>
+        <li>Anything you had to change or assume about this task to make your solution</li>
+        <li>A high level description of your approach</li>
+        <li>If you added any other development-time steps, what they are, why you added them and how to run them</li>
+        <li>Which libraries/frameworks you would have liked to have used (if any), and how they would have made
+            the result better</li>
+        <li>You should include your name and email address so if we have trouble running it we can get in
+            touch with you easily</li>
+    </ul>
+
+    <p>
+        You should zip the project.  I want to be able to unzip it, go into the resulting folder,
+        run <code>npm start</code>, navigate to <code>http://localhost:8011/</code> and see the result.
+        You should be careful not to include anything excessively platform specific, as I may use a mac
+        or windows to do this.
+    </p>
+</section> -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Points to Consider...</h2>
+    </div>
+    <div class="modal-body">
+      <h4>High-Level description</h4>
+      <p>As per the given requirement, the table will show bid and ask prices for 12 predefined currency pairs.</p>
+      <p>Forex price updates are served by Stomp web socket program and will keep updating every second.</p>
+      <p>Used Stomp client's subscribtion function, and invoked the topic /fx/prices to get price updates.</p>
+      <p>Created 2 simple javascript functions to build and update the data table.</p>
+      <p>buildHtmlTable function will keep adding new forex pairs as received from the stomp service</p>
+      <p>When the program receives a currency pair that is already existing in the data table, updateHtmlTable function is called to update the forex pair's values. </p>
+      <p>While updating, if the received lastChangeBid price is greater than current value, the color changes to green, otherwise pink. </p> 
+      <p>As mentioned in the requirement, the whole data table is sorted dynamically and continuously when a table update happens. </p>
+      <p>Created a JS function (tableSorting.js) to achieve the sorting functionality. Currently the lastChangeBid is always sorted in ascending order.</p>
+      <div class="consideration">
+          <h4>Other possible Consideration</h4>
+          <p>The whole program would have been simple, easily readable, maintainable, if we use any MVC frameworks.</p>
+          <p>If we use, ReactJS for example, the table updation part can be easily done with less amount of code. React's state and props can make the task easier for us. Using setState the table values can be easily changed as and when received.</p>
+          <p>Similarly, for Sorting the table, Jquery would have been helpful for finding the DOM nodes, manipulating them, array calculations etc.,</p>
+          <p>As per the requirement, the table has to be sorted as and when the data is received, based on the lastChangeBid value. But I feel, this might affect the user experience. In my opinion, the table should be sorted based on the currency names, so that the user can keep a watch on a particular currency. In our case, it makes the user to keep searching for the currency he wants to watch, since we are shifting positions based on the lastChangeBid value.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <h4>Thank you...</h4>
+        <p>Incase of any questions, please contact me on my &#9993; : sridhar.kumaresan@hotmail.com or &#9742; : 07770059333</p>
+    </div>
+  </div>
+
+</div>
+<!-- Code you write in index.js and anything it depends on will be bundled into bundle.js and
+     is included here -->
+<script src="bundle.js"></script>
+
+</body>
+</html>
