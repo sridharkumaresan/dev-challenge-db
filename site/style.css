@@ -82,6 +82,12 @@ Style for Data Table
 	padding: 15px;
 	
 }
+@media screen and (max-width: 1200px) {
+    .fx-data table {
+        overflow-x: auto;
+        display: block;
+    }
+}
 /* The Modal (background) */
 .modal {
     display: none; 
